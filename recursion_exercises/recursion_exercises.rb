@@ -1,3 +1,5 @@
+require 'byebug'
+
 def range(start, finish)
     return [] if finish < start
     return [1] if finish <= 2
@@ -100,7 +102,7 @@ result = [1, 2, 3, 4, 5]
 
 def merge(arr1, arr2)
     result = []
-    until arr1.empty? || arr2.empty?
+    while !arr1.empty? && !arr2.empty?
         if arr1[0] < arr2[0]
             result << arr1.shift
         else
@@ -113,16 +115,17 @@ end
 #p merge_sort([3,6,2,1,8,9])
 
 def subsets(array)
-    result = [[]]
-    return result if array.empty? 
-    # return [1] if array.length == 1
-
+    #debugger
+    return [[]] if array.empty? 
+    result = []
     # return result + subsets(array[0..-1]) + [array[-1]] + array
-    subsets(array[0...-1]).each do |ele|
-        result << (ele << array[-1])
+    prev_subsets = subsets(array[0...-1])
+    prev_subsets.each do |ele|
+        #debugger
+        result << (ele + [array[-1]])
     end
 
-    return result
+    return prev_subsets + result
 end
 
 p subsets([]) # => [[]]
@@ -130,4 +133,8 @@ p subsets([1]) # => [[], [1]]
 p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
 p subsets([1, 2, 3])
 # => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+
+def permutations
+
+end
 
