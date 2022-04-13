@@ -112,3 +112,22 @@ end
 
 #p merge_sort([3,6,2,1,8,9])
 
+def subsets(array)
+    result = [[]]
+    return result if array.empty? 
+    # return [1] if array.length == 1
+
+    # return result + subsets(array[0..-1]) + [array[-1]] + array
+    subsets(array[0...-1]).each do |ele|
+        result << (ele << array[-1])
+    end
+
+    return result
+end
+
+p subsets([]) # => [[]]
+p subsets([1]) # => [[], [1]]
+p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
+p subsets([1, 2, 3])
+# => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+
